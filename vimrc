@@ -24,7 +24,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
-              
+Plugin 'ElmCast/elm-vim'              
 " Add all you r plugins here (note older versions of Vundle used Bundle instead of Plugin)
               
               
@@ -32,6 +32,7 @@ Plugin 'tpope/vim-fugitive'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+colorscheme desert
 set splitbelow
 set splitright
 set colorcolumn=80
@@ -43,7 +44,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
+nnoremap W 10w
+nnoremap B 10b
 autocmd BufNewFile,BufRead *.py;
     \ set tabstop=4 |
     \ softtabstop=4 |
@@ -54,6 +56,7 @@ autocmd BufNewFile,BufRead *.py;
     \ fileformat=unix
 
 autocmd Filetype javascript setl ts=2 sts=2 sw=2 expandtab autoindent
+autocmd BufNewFile,BufRead *.elm setl ts=2 sts=2 sw=2 expandtab autoindent
 
 autocmd Filetype php setl ts=4 sts=4 sw=4 expandtab autoindent
 
@@ -68,7 +71,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 map <C-n> :NERDTreeToggle<CR>
-map <M-n> :NERDTreeFind<CR>
+map <M-m> :NERDTreeFind<CR>
 "set the encoding
 set encoding=utf-8
 
@@ -85,3 +88,4 @@ let g:ale_linters = {
 \  'php': ['phpcs']
 \}
 let g:ale_python_pylint_options = '--load-plugins pylint_django'
+
