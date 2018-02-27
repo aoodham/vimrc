@@ -21,10 +21,13 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'w0rp/ale'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ElmCast/elm-vim'              
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'flazz/vim-colorschemes'
 " Add all you r plugins here (note older versions of Vundle used Bundle instead of Plugin)
               
               
@@ -32,10 +35,9 @@ Plugin 'ElmCast/elm-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-colorscheme desert
+colorscheme slate
 set splitbelow
 set splitright
-set colorcolumn=80
 set nu
 set smartcase
 set hlsearch
@@ -44,23 +46,14 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap W 10w
-nnoremap B 10b
-autocmd BufNewFile,BufRead *.py;
-    \ set tabstop=4 |
-    \ softtabstop=4 |
-    \ shiftwidth=4 |
-    \ textwidth=79 |
-    \ expandtab |
-    \ autoindent |
-    \ fileformat=unix
+
+hi StatusLine ctermfg=239 guifg=#ffffff ctermbg=15 guibg=#4e4e4e cterm=bold gui=bold
 
 autocmd Filetype javascript setl ts=2 sts=2 sw=2 expandtab autoindent
 autocmd BufNewFile,BufRead *.elm setl ts=2 sts=2 sw=2 expandtab autoindent
-
-autocmd Filetype php setl ts=4 sts=4 sw=4 expandtab autoindent
-
-let g:ackprg = 'ag --vimgrep'
+autocmd Filetype python setl ts=4 sw=4 textwidth=79 expandtab autoindent fileformat=unix colorcolumn=80
+autocmd Filetype php setl ts=4 sts=4 sw=4 expandtab autoindent colorcolumn=100
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
 let g:ctrlp_custom_ignore ={
 			\'dir': '\v[\/](test_fixtures|node_modules)$',
@@ -74,18 +67,20 @@ map <C-n> :NERDTreeToggle<CR>
 map <M-m> :NERDTreeFind<CR>
 "set the encoding
 set encoding=utf-8
-
+let g:airline_theme='biogoo'
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+autocmd Filetype python map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:phpcomplete_mappings = {
+			\ 'jump_to_def': ',g',
+			\}
 "Turn on highlighting
 let python_highlight_all=1
 syntax on
 "  ALE
 "  "
 let g:ale_linters = {
-\  'python': ['pylint'],
+\  'python': ['flake8'],
 \  'javascript': ['eslint'],
 \  'php': ['phpcs']
 \}
-let g:ale_python_pylint_options = '--load-plugins pylint_django'
 
