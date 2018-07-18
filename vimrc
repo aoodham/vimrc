@@ -47,16 +47,25 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-hi StatusLine ctermfg=239 guifg=#ffffff ctermbg=15 guibg=#4e4e4e cterm=bold gui=bold
+"hi StatusLine ctermfg=239 guifg=#ffffff ctermbg=15 guibg=#4e4e4e cterm=bold gui=bold
 
 autocmd Filetype javascript setl ts=2 sts=2 sw=2 expandtab autoindent
 autocmd BufNewFile,BufRead *.elm setl ts=2 sts=2 sw=2 expandtab autoindent
-autocmd Filetype python setl ts=4 sw=4 textwidth=79 expandtab autoindent fileformat=unix colorcolumn=80
+autocmd Filetype python setl ts=4 sw=4 expandtab autoindent fileformat=unix colorcolumn=101
 autocmd Filetype php setl ts=4 sts=4 sw=4 expandtab autoindent colorcolumn=100
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd BufNewFile,BufRead *.yml setl ts=2 sts=2 sw=2 expandtab 
+autocmd FileType go setl ts=8 sw=8 sts=8 expandtab autoindent colorcolumn=100
+autocmd BufNewFile,BufRead Jenkinsfile setl ts=2 sts=2 sw=2 expandtab filetype=groovy
+autocmd FileType yaml setl ts=2 sw=2 sts=2 expandtab	
+augroup BgHighlight
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
+augroup END
 
 let g:ctrlp_custom_ignore ={
-			\'dir': '\v[\/](test_fixtures|node_modules)$',
+			\'dir': '\v[\/](site-packages|prod|env|test_fixtures|node_modules|vendor)$',
 			\'file': '\v\.pyc$',
 			\}
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
@@ -79,8 +88,10 @@ syntax on
 "  ALE
 "  "
 let g:ale_linters = {
-\  'python': ['flake8'],
+\  'python': ['pylint'],
 \  'javascript': ['eslint'],
 \  'php': ['phpcs']
 \}
 
+let g:ale_php_phpcs_use_global = 1
+let g:ackprg = 'ag --vimgrep'
