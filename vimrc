@@ -47,6 +47,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+nnoremap <leader>p :CtrlPTag<cr>
+
 "hi StatusLine ctermfg=239 guifg=#ffffff ctermbg=15 guibg=#4e4e4e cterm=bold gui=bold
 
 autocmd Filetype javascript setl ts=2 sts=2 sw=2 expandtab autoindent
@@ -65,7 +67,7 @@ augroup BgHighlight
 augroup END
 
 let g:ctrlp_custom_ignore ={
-			\'dir': '\v[\/](site-packages|prod|env|test_fixtures|node_modules|vendor)$',
+			\'dir': '\v[\/](site-packages|.venv|dist|prod|env|test_fixtures|node_modules|egg-info|vendor|datasets)$',
 			\'file': '\v\.pyc$',
 			\}
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
@@ -95,3 +97,14 @@ let g:ale_linters = {
 
 let g:ale_php_phpcs_use_global = 1
 let g:ackprg = 'ag --vimgrep'
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
