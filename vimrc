@@ -28,6 +28,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ElmCast/elm-vim'              
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'tell-k/vim-autopep8'
 " Add all you r plugins here (note older versions of Vundle used Bundle instead of Plugin)
               
               
@@ -108,3 +109,8 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+" autoformat
+autocmd FileType python nnoremap <buffer> <F8> :call Autopep8()<CR>
+let g:autopep8_disable_show_diff=1
+let g:autopep8_on_save=1

@@ -5,6 +5,7 @@
 	`git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 2. Copy vimrc to `~/.vimrc`
 3. run `:PluginInstall`
+4. Install autopep8 and pylint into your python env (globally is easiest)
 4. (optional) install the silver-searcher
 5. (optional) install ctags
 
